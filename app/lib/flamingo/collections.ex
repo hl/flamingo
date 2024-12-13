@@ -21,6 +21,22 @@ defmodule Flamingo.Collections do
         }
 
   @doc """
+  Fetches all collections.
+  """
+  @spec all_collections() :: [Collection.t()]
+  def all_collections do
+    Repo.all(Collection)
+  end
+
+  @doc """
+  Fetches a collection by ID.
+  """
+  @spec get_collection!(id :: Collection.id()) :: Collection.t()
+  def get_collection!(id) do
+    Repo.get!(Collection, id)
+  end
+
+  @doc """
   Creates a Collection.
   """
   @spec create_collection(attrs :: attrs()) ::
@@ -36,6 +52,14 @@ defmodule Flamingo.Collections do
           {:ok, Collection.t()} | {:error, Ecto.Changeset.t(Collection.t())}
   def update_collection(collection, attrs) do
     store_collection(collection, attrs)
+  end
+
+  @doc """
+  Deletes a Collection.
+  """
+  @spec delete_collection(collection :: Collection.t()) :: {:ok, Collection.t()}
+  def delete_collection(collection) do
+    Repo.delete(collection)
   end
 
   @spec store_collection(collection :: Collection.t(), attrs :: attrs()) ::
@@ -60,8 +84,8 @@ defmodule Flamingo.Collections do
     |> validate_required([:name])
   end
 
-  @spec change_block(block :: FlamingoSchemas.Block.t(), attrs :: map()) ::
-          Ecto.Changeset.t(map())
+  @spec change_block(block :: FlamingoSchemas.Block.t(), attrs :: block()) ::
+          Ecto.Changeset.t(FlamingoSchemas.Block.t())
   def change_block(block, attrs) do
     block
     |> cast(attrs, [:label, :name, :type])
