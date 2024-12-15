@@ -1,0 +1,11 @@
+<.header>
+  Collections
+</.header>
+<.table id="collections" rows={@collections}>
+  <:col :let={collection} label="Name">
+    <%= collection.name %>
+  </:col>
+  <:col :let={collection} label="Description">
+    <%= collection.description %>
+  </:col>
+</.table>
