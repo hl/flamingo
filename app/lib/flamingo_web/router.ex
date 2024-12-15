@@ -1,6 +1,8 @@
 defmodule FlamingoWeb.Router do
   use FlamingoWeb, :router
 
+  import FlamingoWeb.CollectionLive.Index
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -18,6 +20,7 @@ defmodule FlamingoWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    live "/collections", CollectionLive.Index, :index
   end
 
   # Other scopes may use custom stacks.
