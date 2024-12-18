@@ -18,6 +18,7 @@ defmodule FlamingoWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    live "/collections/new", CollectionLive, :new
   end
 
   # Other scopes may use custom stacks.

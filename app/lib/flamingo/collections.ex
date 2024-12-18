@@ -17,6 +17,7 @@ defmodule Flamingo.Collections do
   @type attrs :: %{
           name: String.t(),
           description: String.t(),
+          handle: String.t(),
           blocks: [block() | FlamingoSchemas.Block.t()]
         }
 
@@ -73,15 +74,16 @@ defmodule Flamingo.Collections do
           Ecto.Changeset.t(Collection.t())
   def change_collection(collection, attrs) do
     collection
-    |> cast(attrs, [:name, :description])
+    |> cast(attrs, [:name, :description, :handle])
     |> cast_embed(:blocks,
       with: &change_block/2,
       sort_param: :block_sort,
       drop_param: :block_drop
     )
-    |> unsafe_validate_unique([:name], Repo)
+    |> unsafe_validate_unique([:name, :handle], Repo)
     |> unique_constraint(:name)
-    |> validate_required([:name])
+    |> unique_constraint(:handle)
+    |> validate_required([:name, :handle])
   end
 
   @spec change_block(block :: FlamingoSchemas.Block.t(), attrs :: block()) ::
