@@ -8,6 +8,7 @@ defmodule FlamingoSchemas.Collection do
           id: id() | nil,
           name: String.t() | nil,
           description: String.t() | nil,
+          handle: String.t() | nil,
           template: String.t() | nil,
           blocks: Ecto.Schema.embeds_many(FlamingoSchemas.Block.t()),
           pages: Ecto.Schema.has_many(FlamingoSchemas.Page.t()),
@@ -18,6 +19,7 @@ defmodule FlamingoSchemas.Collection do
   schema "collections" do
     field :name
     field :description
+    field :handle
     field :template
 
     embeds_many :blocks, FlamingoSchemas.Block, on_replace: :delete
