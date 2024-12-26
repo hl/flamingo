@@ -62,7 +62,7 @@ defmodule Flamingo.MixProject do
       {:puid, "~> 2.3"},
       {:slugify, "~> 1.3"},
       {:boundary, "~> 0.10.4"},
-      {:solid, "~> 0.16.0"}
+      {:solid, "~> 0.17"}
     ]
   end
 
